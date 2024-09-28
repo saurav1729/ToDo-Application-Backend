@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  title: ToDo App API Documentation
+  version: 1.0.0
+  description: API Documentation for To-Do App
+  contact:
+    name: Saurav Jha
+    email: jha.saurav.dev@gmail.com
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /createToDo:
+    post:
+      summary: Create a new ToDo item
+      description: This endpoint creates a new ToDo item.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Buy groceries
+                description:
+                  type: string
+                  example: Purchase milk, bread, and eggs
+      responses:
+        '200':
+          description: ToDo created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        example: Buy groceries
+                      description:
+                        type: string
+                        example: Purchase milk, bread, and eggs
+                  message:
+                    type: string
+                    example: Entry created successfully
+
+  /getToDo:
+    get:
+      summary: Get all ToDo items
+      description: Fetches all ToDo items.
+      responses:
+        '200':
+          description: Successfully fetched all ToDos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                          example: Buy groceries
+                        description:
+                          type: string
+                          example: Purchase milk, bread, and eggs
+                  message:
+                    type: string
+                    example: Entire todos are fetched
+
+  /getToDo/{id}:
+    get:
+      summary: Get a specific ToDo item by ID
+      description: Fetches a specific ToDo item by its ID.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The ID of the ToDo item
+      responses:
+        '200':
+          description: Successfully fetched the ToDo item
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        example: Buy groceries
+                      description:
+                        type: string
+                        example: Purchase milk, bread, and eggs
+                  message:
+                    type: string
+                    example: ToDo for {id} fetched
+
+  /updateToDo/{id}:
+    post:
+      summary: Update a ToDo item
+      description: Updates a ToDo item by its ID.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The ID of the ToDo item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Buy groceries
+                description:
+                  type: string
+                  example: Purchase milk, bread, and eggs
+      responses:
+        '200':
+          description: ToDo updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        example: Buy groceries
+                      description:
+                        type: string
+                        example: Purchase milk, bread, and eggs
+                  message:
+                    type: string
+                    example: ToDo is updated for id {id}
